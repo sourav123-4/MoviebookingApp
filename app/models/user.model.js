@@ -23,8 +23,8 @@ module.exports = (mongoose)=>{
     password : {type : String, required : true},
     role : {type : String, required : true, default : "user"},
     isLoggedIn : {type : Boolean, required : true},
-    uuid : {type : String, required : true},
-    accesstoken : {type : String, required : true},
+    uuid : {type : String},
+    accesstoken : {type : String},
     coupens : {type : [Coupen]},
     bookingRequests : {type : [BookingRequest]},
   }));
