@@ -26,7 +26,7 @@ const signUp = async (req, res)=>{
           email : email_address,
           first_name,
           last_name,
-          username : `${first_name} ${last_name}`,
+          username : `${first_name}${last_name}`,
           contact : mobile_number,
           password,
           role : role? role : "user",
