@@ -1,5 +1,6 @@
 const db = require("../models/");
 
+// artists collection
 const Artist = db.artists;
 
 const findAllArtists = async (req, res)=>{

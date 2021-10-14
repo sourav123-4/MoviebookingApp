@@ -1,5 +1,6 @@
 const db = require("../models/");
 
+// genres collection
 const Genre = db.genres;
 
 const findAllGenres = async (req, res)=>{

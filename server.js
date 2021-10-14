@@ -28,9 +28,13 @@ app.get("/", (req, res)=>{
   res.json({message : "Welcome to Upgrad Movie booking application development."});
 })
 
+// movie routes
 require("./app/routes/movie.routes")(app);
+// genre routes
 require("./app/routes/genre.routes")(app);
+// artist routes
 require("./app/routes/artist.routes")(app);
+// user routes
 require("./app/routes/user.routes")(app);
 
 app.listen(PORT, ()=>console.log(`Server has started at port ${PORT}`))

@@ -1,31 +1,41 @@
 const db = require("../models/");
+
+//movies collection
 const Movie = db.movies;
 
+// function to return all movies matching the specified filters
 const findAllMovies= async(req, res)=>{
   try{
     console.log(req.query)
-    const {status, title, genres, artists, start_date, end_date} = req.query; 
+    const {status, title, genres, artists, start_date, end_date} = req.query;
+    // getting all movies incase no filter is specified
     let movies = await Movie.find();
+    // getting movies by its status
     if(status){
       console.log("checking by status")
       movies = await findByStatus(status, res);
     }
+    // getting movie by its title
     if(title){
       console.log("checking by title");
       movies = findByTitle(title, movies);
     }
+    // gettomg movies by its genres
     if(genres){
       console.log("checking by genres")
       movies = findByGenres(genres, movies);
     }
     if(artists){
+      // getting movies by its artists
       console.log("checking by artists")
       movies = findByArtists(artists, movies);
     }
+      // getting movies by its release start date
     if(start_date){
       console.log("checking by startdate")
       movies = findByStartDate(start_date, movies);
     }
+      // getting movies by its release end date
     if(end_date){
       console.log("checking by enddate")
       movies = findByEndDate(end_date, movies);
@@ -54,16 +64,12 @@ const findByTitle = (title, movies)=>{
 }
 
 const findByGenres = (genres, movies)=>{
-  console.log("simple genres", genres);
   let genreArr = genres.split(",");
-  console.log("GenreArr : ", genreArr);
   return movies.filter((item)=>item.genres.some(genre=>genreArr.includes(genre)));
 }
 
 const findByArtists = (artists, movies)=>{
-  console.log("simple artist", artists);
   let artistArr = artists.split(",");
-  console.log("ArtistArr : ", artistArr);
   return movies.filter((item)=>item.artists.some(artist=>artistArr.includes(artist)));
 }
 
@@ -75,6 +81,7 @@ const findByEndDate = (endDate, movies)=>{
   return movies.filter(item=>item.endDate === endDate);
 }
 
+// find a single movie based upon its id
 const findOne = async(req, res)=>{
   try{
     const {movieId} = req.params;
@@ -94,6 +101,7 @@ const findOne = async(req, res)=>{
   }
 }
 
+// finding the shows data of a specific movie
 const findShows = async (req, res) =>{
   try{
     const {movieid} = req.params;
